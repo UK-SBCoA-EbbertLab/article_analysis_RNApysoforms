@@ -54,24 +54,9 @@ packrat.lock
 *.csv
 *.tsv
 
-# VSCode
-.vscode/
-.history
-*.code-workspace
-.settings/
-
 # Jupyter Notebooks
 .ipynb_checkpoints/
 
-# Logs and databases
-*.log
-*.sqlite
-*.db
-*.sqlite3
-*.log
-*.log.*
-nohup.out
 
-# OS generated files
-.DS_Store
-Thumbs.db
+# Singularity container image
+*.sif
