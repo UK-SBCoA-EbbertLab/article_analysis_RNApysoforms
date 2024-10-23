@@ -1,0 +1,77 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+Pipfile
+Pipfile.lock
+poetry.lock
+env/
+venv/
+ENV/
+.venv/
+*.env
+*.venv
+.mypy_cache/
+.pytest_cache/
+.ipynb_checkpoints/
+*.parquet
+*.h5
+*.csv
+*.tsv
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+.Rbuildignore
+.Rprofile
+*.Rhistory
+*.Rdata
+*.Rout
+*.pdf
+*.html
+*.md
+*.DS_Store
+*.tar.gz
+__MACOSX/
+vignettes/*.html
+vignettes/*.md
+vignettes/*.pdf
+renv/
+renv.lock
+packrat/
+packrat.lock
+*.Rds
+*.RData
+*.rda
+*.csv
+*.tsv
+
+# VSCode
+.vscode/
+.history
+*.code-workspace
+.settings/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Logs and databases
+*.log
+*.sqlite
+*.db
+*.sqlite3
+*.log
+*.log.*
+nohup.out
+
+# OS generated files
+.DS_Store
+Thumbs.db
