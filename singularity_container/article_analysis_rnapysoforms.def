@@ -1,0 +1,98 @@
+Bootstrap: docker
+From: ubuntu:22.04
+
+%post
+
+    ## Make Shell Noninteractive ##
+    DEBIAN_FRONTEND=noninteractive
+
+    ## Install necessary packages and 
+    apt-get update && apt-get -y install wget git time lsb-release sudo gnupg curl unzip g++ make rsync vim locales libssl-dev \
+    libcurl4-openssl-dev libxml2-dev libnlopt-dev cmake libblas-dev liblapack-dev gfortran libfreetype6-dev libfribidi-dev libharfbuzz-dev \
+    pandoc zlib1g-dev libicu-dev libfontconfig1-dev libjpeg-dev libpng-dev libtiff-dev libbz2-dev liblzma-dev libzmq3-dev libtiff5-dev \
+    build-essential libssl-dev libffi-dev python3-dev python3-pip
+
+    ## Set timezone and language for container ##
+    ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+
+    export LANGUAGE=en_US.UTF-8
+    export LANG=en_US.UTF-8
+    export LC_ALL=en_US.UTF-8
+    sudo locale-gen en_US.UTF-8
+
+    echo 'export LANGUAGE="en_US.UTF8"' >> $SINGULARITY_ENVIRONMENT
+    echo 'export LANG="en_US.UTF8"' >> $SINGULARITY_ENVIRONMENT
+    echo 'export LC_ALL="en_US.UTF8"' >> $SINGULARITY_ENVIRONMENT
+
+    ## Install Python packages RNApysoforms ##
+    pip install RNApysoforms seaborn notebook
+
+
+    ## Install R ##
+    sudo apt install -y --no-install-recommends software-properties-common dirmngr
+    wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/r-project.gpg
+    echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/" | sudo tee -a /etc/apt/sources.list.d/r-project.list
+    sudo apt update
+    sudo apt install -y r-base r-base-core r-recommended r-base-dev
+
+
+    ## Install R Packages: tidyverse, ggtranscript, microbenchmark ##
+    R --slave -e 'install.packages("tidyverse")'
+    R --slave -e 'install.packages("ggtranscript")'
+    R --slave -e 'install.packages("microbenchmark")'
+    R --slave -e 'install.packages("devtools")'
+    R --slave -e 'install.packages("BiocManager")'
+    R --slave -e 'BiocManager::install(c("SummarizedExperiment", "S4Vectors", "BSgenome", "IRanges", "GenomeInfoDb", "GenomicAlignments", "GenomicFeatures", "GenomicRanges", "Rsamtools"))'
+    R --slave -e 'devtools::install_github("dzhang32/ggtranscript")'
+
+%test
+            
+    ## Check if installations are on path and/or display their versions ##
+    python --version
+    R --version
+
+	
+
+%labels
+    author Bernardo Aguzzoli Heberle
+    version v1.0.0
+
+%help
+
+    Software included in the container are:
+
+    pip==22.0.2
+    Python==3.10.12
+        RNApysoforms==0.9.0
+        seaborn==0.13.2
+        plotly==5.24.1
+        notebook==7.2.2
+        matplotlib==3.9.2
+        pandas==2.2.3
+        pyarrow==17.0.0
+        polars==1.10.9
+        numpy==2.1.2
+        kaleido==0.2.1 
+    R==4.4.1
+        devtools==2.4.5
+        ggtranscript==1.0.0
+        tidyverse==2.0.0
+        microbenchmark==1.5.0
+        BiocManager==1.30.25
+        SummarizedExperiment==1.34.0
+        S4Vectors==0.42.1
+        BSgenome==1.72.0
+        IRanges==2.38.1
+        GenomeInfoDb==1.40.1
+        GenomicAlignments==1.40.0
+        GenomicFeatures==1.56.0
+        GenomicRanges==1.56.2
+        Rsamtools==2.20.0
+    
+
+    NOTE THAT VERSIONS OF THE SOFTWARE INSTALLED MAY CHANGE THROUGH TIME IF YOU BUILD THE IMAGE FROM THE RECIPE FILE.
+    TO GET THE ORIGINAL VERSION OF THIS CONTAINER PULL IT FROM THE SINGULARITY LIB WITH THE COMMAND:
+
+    singularity pull --arch amd64 library://ebbertlab/rnapysoforms/article_analysis_rnapysoforms:2024-10-23
+
+    For more information about the use of this singularity container access: https://github.com/UK-SBCoA-EbbertLab/article_analysis_RNApysoforms
