@@ -62,7 +62,7 @@ for i in range(1, 101):
             y='transcript_id',                 # Column name for the y-axis grouping
             annotation_hue="transcript_biotype",  # Column name for color coding
         )
-
+        
         # iii. Generate the plot using the traces, adding a subplot title
         fig = RNApy.make_plot(
             traces=traces, 
@@ -80,9 +80,9 @@ for i in range(1, 101):
     elapsed_time = end_time - start_time  # Note: 'end_time_2' is undefined; intended to calculate elapsed time
 
     # Add the iteration number and elapsed time to the timings list
-    timings.append({'iteration': i, 'elapsed_time_python': elapsed_time})
+    timings.append({'iteration': i, 'elapsed_time_python_save': elapsed_time})
 
-# Step 5: Create a DataFrame from the timing results
+# Step 6: Create a DataFrame from the timing results
 timing_df = pl.DataFrame(timings)
 
 # Save the timing results to a CSV file for analysis

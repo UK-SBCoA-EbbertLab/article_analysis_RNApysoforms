@@ -24,8 +24,8 @@ From: ubuntu:22.04
     echo 'export LANG="en_US.UTF8"' >> $SINGULARITY_ENVIRONMENT
     echo 'export LC_ALL="en_US.UTF8"' >> $SINGULARITY_ENVIRONMENT
 
-    ## Install Python packages RNApysoforms ##
-    pip install RNApysoforms seaborn notebook
+    ## Install Python packages ##
+    pip install RNApysoforms seaborn notebook scipy statsmodels cliffs-delta
 
 
     ## Install R ##
@@ -73,6 +73,11 @@ From: ubuntu:22.04
         polars==1.10.9
         numpy==2.1.2
         kaleido==0.2.1 
+        statsmodels==0.14.4
+        scipy==1.14.1
+        pingouin==0.5.5
+        cliffs-delta==1.0.0
+%%post
     R==4.4.1
         devtools==2.4.5
         ggtranscript==1.0.0

@@ -123,6 +123,8 @@ read_ensembl_gtf <- function(path) {
     return(df_result)
 }
 
+
+
 # Step 2: Read the GTF file and create a data frame with genomic annotations
 df <- read_ensembl_gtf("../../data/Homo_sapiens_chr21_and_Y.GRCh38.110.gtf")
 
@@ -135,7 +137,7 @@ gene_ids_list <- df %>%
 df_list <- gene_ids_list %>%
     map(~ df %>% filter(gene_id == .x))
 
-# Step 5: Define a function to loop through gene data frames and generate plots
+# Step 5: Define a function to loop through gene data frames and generate plots, render and save
 loop_through_gene_dfs <- function(df_list) {
 
     # Initialize a counter for naming output plot files
@@ -169,26 +171,22 @@ loop_through_gene_dfs <- function(df_list) {
 
         # Increment the counter for the next plot
         j <- j + 1
+
     }
 }
 
-# Step 6: Iterate 100 times, timing each iteration, and collect timing results
+# Step 7: Iterate 100 times, timing each iteration, and collect timing results
 timing_df <- data.frame(iteration = integer(), elapsed_time_r = numeric())
 
 # Outer loop using system.time to measure each iteration's timing
 for (i in 1:100) {
-    # Time each iteration of the plotting process
-    time_taken <- system.time({
-        loop_through_gene_dfs(df_list)
-    })
+    
+    # Time each iteration of the plotting process with saving
+    time_taken <- system.time({loop_through_gene_dfs(df_list)})
 
     # Append the iteration number and elapsed time to the timing data frame
-    timing_df <- rbind(timing_df, data.frame(
-        iteration = i,
-        elapsed_time_r = time_taken["elapsed"]
-    ))
+    timing_df <- rbind(timing_df, data.frame(iteration = i, elapsed_time = time_taken["elapsed"]))
 }
 
-# Step 7: Save the timing results to a CSV file for analysis
+# Step 8: Save the timing results to a CSV file for analysis
 write.csv(timing_df, "../../data/r_timing_results.csv", row.names = FALSE)
-
