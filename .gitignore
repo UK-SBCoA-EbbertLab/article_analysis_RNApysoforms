@@ -22,8 +22,6 @@ ENV/
 .ipynb_checkpoints/
 *.parquet
 *.h5
-*.csv
-*.tsv
 
 # R
 .Rhistory
@@ -35,7 +33,6 @@ ENV/
 *.Rhistory
 *.Rdata
 *.Rout
-*.pdf
 *.html
 *.md
 *.DS_Store
@@ -51,8 +48,6 @@ packrat.lock
 *.Rds
 *.RData
 *.rda
-*.csv
-*.tsv
 
 # Jupyter Notebooks
 .ipynb_checkpoints/
