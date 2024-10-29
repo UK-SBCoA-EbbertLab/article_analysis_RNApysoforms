@@ -3,7 +3,7 @@
 ### Repository with code for the analysis done for the RNApysoforms publication
 
 ### Link to publication: XXXX
-### DOI:
+### DOI: XXXX
 ### Link to RNApysoform GitHub Repo: https://github.com/UK-SBCoA-EbbertLab/RNApysoforms
 
 ## Repository directory structure:
