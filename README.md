@@ -8,7 +8,7 @@
 
 ## Repository directory structure:
 
-`data` - Data used for making publication figures and speed comparison analysis
+`data` - Data used for making publication figures and speed comparison analysis. Also includes speed comparison output files.
 
 `figures` - All figures rendered for the speed comparison between packages and the publication figures.
 
