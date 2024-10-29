@@ -33,7 +33,6 @@ ENV/
 *.Rhistory
 *.Rdata
 *.Rout
-*.html
 *.md
 *.DS_Store
 *.tar.gz
